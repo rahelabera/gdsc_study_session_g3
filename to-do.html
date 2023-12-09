@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+        font-family: sans-serif;
+        }
+
+        #taskList {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        }
+
+        .taskItem {
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #eee;
+        border-radius: 5px;
+        }
+
+        .removeButton {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+
+    </style>
+    
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form id="addTaskForm">
+        <input type="text" id="newTaskInput" placeholder="Add new task">
+        <button type = "button" id="addTaskButton">Add Task</button>
+    </form>
+    <div id="taskList"></div>
+    <script>
+        const addTaskForm = document.getElementById("addTaskForm")
+        const taskList = document.getElementById("taskList")
+        const addTaskButton = document.getElementById("addTaskButton")
+        const newTaskInput = document.getElementById("newTaskInput")
+
+        addTaskButton.addEventListener("click", addtask)
+
+        function addtask(){
+            const newTaskText = newTaskInput.value;
+            if(newTaskText.trim() === '')
+            {
+                return;
+            }
+            const taskItem = document.createElement('div');
+            taskItem.classList.add('taskItem');
+            taskItem.textContent = newTaskText;
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('removeButton');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', () => { 
+                taskItem.parentNode.removeChild(taskItem);
+        });
+
+            taskItem.appendChild(removeButton);
+            taskList.appendChild(taskItem);
+
+            newTaskInput.value = '';
+
+        }
+    </script>
+</body>
+</html>
